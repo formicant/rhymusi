@@ -1,3 +1,4 @@
+import { Syllable, getSyllables } from './phonetics';
 import { Word as LinkuWord } from './linku';
 import linku from './linku.json';
 
@@ -14,6 +15,7 @@ function makeWord(w: LinkuWord): Word {
   return {
     word: w.word,
     category: category,
+    syllables: getSyllables(w.word),
     definition: w.def[defaultLanguage],
   };
 }
@@ -21,7 +23,8 @@ function makeWord(w: LinkuWord): Word {
 
 export interface Word {
   readonly word: string;
-  readonly category: number,
+  readonly category: number;
+  readonly syllables: Syllable[],
   readonly definition: string;
 }
 

@@ -17,12 +17,12 @@ export interface Language {
 }
 
 export interface Completeness {
-  readonly obscure: string,
-  readonly rare: string,
-  readonly uncommon: string,
-  readonly common: string,
-  readonly widespread: string,
-  readonly core: string,
+  readonly obscure: string;
+  readonly rare: string;
+  readonly uncommon: string;
+  readonly common: string;
+  readonly widespread: string;
+  readonly core: string;
 }
 
 export interface Credit {
