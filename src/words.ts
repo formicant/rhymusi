@@ -33,4 +33,6 @@ export const categories = [
   /* 4: */ 'ale'
 ];
 
+export const defaultCategory = 2;
+
 export const words = Object.values(linku.data).map(makeWord);

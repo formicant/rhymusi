@@ -1,12 +1,15 @@
-import { words } from "./words";
-
+import { initInputs } from './ui';
 
 function initialize() {
   console.log('Initializing...');
 
-  console.log(words);
+  initInputs(onChanged);
 
   console.log('Initializied.');
+}
+
+function onChanged(word: string, category: number) {
+  console.log(`Input values changed: '${word}', ${category}`);
 }
 
 initialize();

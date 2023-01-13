@@ -6,7 +6,35 @@
 
 body {
   background-color: #eee;
+}
+
+body, input {
   font-family: sans-serif;
   font-size: 20px;
-  padding: 1em;
+}
+
+header {
+  padding: 0.5em 1em;
+}
+
+main {
+  padding: 0 1em 1em;
+}
+
+input {
+  margin: 0 0.25em;
+}
+
+input[type="text"] {
+  width: 12em;
+}
+
+input[type="range"] {
+  vertical-align: middle;
+  width: 8em;;
+}
+
+.separator {
+  display: inline-block;
+  width: 0.5em;
 }
