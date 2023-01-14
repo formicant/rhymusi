@@ -5,24 +5,23 @@ const syllableRegexp = /([jklmnpstw]?)([aeiou])(n?)/g;
  * turns the coda into an onset of the following syllable.
  */
 function simplify(syllables: Syllable[]): Syllable[] {
-  let result = [];
-  let previous = undefined;
-  for(let current of syllables) {
-    if(previous?.coda && !current.onset) {
+  const result = [];
+  let previous;
+  for (let current of syllables) {
+    if (previous?.coda && !current.onset) {
       current = { ...current, onset: previous.coda };
       previous = { ...previous, coda: '' };
     }
-    if(previous) {
+    if (previous) {
       result.push(previous);
     }
     previous = current;
   }
-  if(previous) {
+  if (previous) {
     result.push(previous);
   }
   return result;
 }
-
 
 export interface Syllable {
   readonly onset: string;
@@ -31,8 +30,8 @@ export interface Syllable {
 }
 
 export function getSyllables(word: string): Syllable[] {
-  let syllables = [];
-  for(const [_, o, n, c] of word.toLowerCase().matchAll(syllableRegexp)) {
+  const syllables = [];
+  for (const [, o, n, c] of word.toLowerCase().matchAll(syllableRegexp)) {
     syllables.push({ onset: o || '', nucleus: n || '', coda: c || '' });
   }
   return simplify(syllables);

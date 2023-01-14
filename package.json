@@ -15,6 +15,12 @@
   "author": "Formicant <formicant@gmail.com> (https://github.com/formicant)",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/create-config": "^0.4.2",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0",

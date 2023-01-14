@@ -1,25 +1,20 @@
 import { Syllable, getSyllables } from './phonetics';
 import { Word as LinkuWord } from './linku';
-import linku from './linku.json';
+import linku from './linku_data.json';
 
 const defaultLanguage = 'en';
 
 const puSamaWords = ['ali', 'kin', 'namako', 'oko'];
 
-function makeWord(w: LinkuWord): Word {
-  let category = categories.indexOf(
-    puSamaWords.includes(w.word)
-      ? 'pu sama'
-      : categories.includes(w.book) ? w.book : 'ale'
-  );
-  return {
-    word: w.word,
-    category: category,
-    syllables: getSyllables(w.word),
-    definition: w.def[defaultLanguage],
-  };
-}
+export const categories = [
+  /* 0: */ 'pu',
+  /* 1: */ 'pu sama',
+  /* 2: */ 'ku suli',
+  /* 3: */ 'ku lili',
+  /* 4: */ 'ale',
+];
 
+export const defaultCategory = 2;
 
 export interface Word {
   readonly word: string;
@@ -28,14 +23,22 @@ export interface Word {
   readonly definition: string;
 }
 
-export const categories = [
-  /* 0: */ 'pu',
-  /* 1: */ 'pu sama',
-  /* 2: */ 'ku suli',
-  /* 3: */ 'ku lili',
-  /* 4: */ 'ale'
-];
+function makeWord(w: LinkuWord): Word {
+  let category;
+  if (puSamaWords.includes(w.word)) {
+    category = 'pu sama';
+  } else if (categories.includes(w.book)) {
+    category = w.book;
+  } else {
+    category = 'ale';
+  }
 
-export const defaultCategory = 2;
+  return {
+    word: w.word,
+    category: categories.indexOf(category),
+    syllables: getSyllables(w.word),
+    definition: w.def[defaultLanguage],
+  };
+}
 
 export const words = Object.values(linku.data).map(makeWord);

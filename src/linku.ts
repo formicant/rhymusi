@@ -1,4 +1,4 @@
-// Types of the `linku.json` file.
+// Types of the `linku_data.json` file.
 
 export interface Linku {
   readonly languages: { [id:   string]: Language };

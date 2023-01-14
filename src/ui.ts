@@ -1,26 +1,26 @@
-import { categories, defaultCategory } from "./words";
+import { categories, defaultCategory } from './words';
 
 function getById<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
-  if(!element)
+  if (!element) {
     throw Error(`Cannot find element with id '${id}'.`);
+  }
   return element as T;
 }
-
 
 export function initInputs(onChanged: (word: string, category: number) => void) {
   const wordInput = getById<HTMLInputElement>('wordInput');
   const categorySlider = getById<HTMLInputElement>('categorySlider');
   const categoryLabel = getById<HTMLSpanElement>('categoryLabel');
 
-  function onCategoryInput(ev?: Event) {
+  function onCategoryInput() {
     const word = wordInput.value;
     const category = Number(categorySlider.value);
     categoryLabel.textContent = categories[category];
     onChanged(word, category);
   }
 
-  function onWordInput(ev?: Event) {
+  function onWordInput() {
     const word = wordInput.value;
     const category = Number(categorySlider.value);
     onChanged(word, category);
