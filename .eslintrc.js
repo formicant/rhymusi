@@ -23,7 +23,8 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'import/prefer-default-export': 'off',
-    'no-multi-spaces': 'warn',
+    'no-multi-spaces': 'off',
+    'key-spacing': ['error', { mode: 'minimum' }],
     'no-restricted-syntax': [
       'error',
       'ForInStatement',

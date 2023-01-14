@@ -2,10 +2,6 @@ import { Syllable, getSyllables } from './phonetics';
 import { Word as LinkuWord } from './linku';
 import linku from './linku_data.json';
 
-const defaultLanguage = 'en';
-
-const puSamaWords = ['ali', 'kin', 'namako', 'oko'];
-
 export const categories = [
   /* 0: */ 'pu',
   /* 1: */ 'pu sama',
@@ -23,6 +19,16 @@ export interface Word {
   readonly definition: string;
 }
 
+/**
+ * These words are present in _pu_ as synonyms of other words.
+ * Linku considers three of them _ku suli_ which, in my opinion,
+ * is not quite correct since they are _pu_ words.
+ * So, I place them into a special category: _pu sama_.
+ */
+const puSamaWords = ['ali', 'kin', 'namako', 'oko'];
+
+const definitionLanguage = 'en';
+
 function makeWord(w: LinkuWord): Word {
   let category;
   if (puSamaWords.includes(w.word)) {
@@ -37,7 +43,7 @@ function makeWord(w: LinkuWord): Word {
     word: w.word,
     category: categories.indexOf(category),
     syllables: getSyllables(w.word),
-    definition: w.def[defaultLanguage],
+    definition: w.def[definitionLanguage],
   };
 }
 

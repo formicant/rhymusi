@@ -1,6 +1,6 @@
 import { initInputs } from './ui';
 import { words } from './words';
-import { getSyllables } from './phonetics';
+import { getSyllables, Syllable } from './phonetics';
 
 function onChange(word: string, category: number) {
   console.log(`Input values changed: '${word}', ${category}`);
