@@ -11,12 +11,12 @@
 // [ ] yupekosi
 // [ ] yutu
 
-const vowels = 'ieaou';
-const consonants = 'jklmnpstw';
+const vowels = 'ieaou'; // vowels considered similar are next to each other
+const consonants = 'jklmnpstw'; // order can be arbitrary
 
 interface Articulation {
-  readonly place: string;
-  readonly manner: string;
+  readonly place: 'none' | 'labial' | 'dental' | 'palatal' | 'velar';
+  readonly manner: 'none' | 'approximant' | 'fricative' | 'plosive' | 'nasal' | 'lateral';
 }
 
 /* eslint-disable quote-props */
