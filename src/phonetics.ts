@@ -38,7 +38,7 @@ const syllableRegexp = new RegExp(`([${consonants}]?)([${vowels}])(n?)`, 'g');
 /**
  * @returns 0 for identical, 1 for similar, or 2 for distant vowels.
  */
-function getVowelDistance(v1: string, v2: string): number {
+export function getVowelDistance(v1: string, v2: string): number {
   const i1 = vowels.indexOf(v1);
   const i2 = vowels.indexOf(v2);
   return Math.min(2, Math.abs(i1 - i2));
@@ -47,7 +47,7 @@ function getVowelDistance(v1: string, v2: string): number {
 /**
  * @returns 0 for identical, 1 for similar, or 2 for distant consonants.
  */
-function getConsonantDistance(c1: string, c2: string): number {
+export function getConsonantDistance(c1: string, c2: string): number {
   const a1 = articulation[c1];
   const a2 = articulation[c2];
   const placeDistance = a1.place === a2.place ? 0 : 1;
@@ -58,8 +58,9 @@ function getConsonantDistance(c1: string, c2: string): number {
 /**
  * When a syllable with a coda is followed by a syllable with no onset,
  * turns the coda into an onset of the following syllable.
+ * 'pon|a' -> 'po|na', 'ken|un|pa' -> 'ke|nun|pa'
  */
-function simplify(syllables: Syllable[]): Syllable[] {
+function normalize(syllables: Syllable[]): Syllable[] {
   const result = [];
   let previous;
   for (let current of syllables) {
@@ -98,5 +99,5 @@ export function getSyllables(word: string): Syllable[] {
     });
     isStressed = false;
   }
-  return simplify(syllables);
+  return normalize(syllables);
 }
