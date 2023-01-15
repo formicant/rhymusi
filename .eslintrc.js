@@ -33,4 +33,5 @@ module.exports = {
       'WithStatement',
     ],
   },
+  plugins: ['only-warn'],
 };
