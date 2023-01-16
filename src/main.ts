@@ -1,12 +1,14 @@
-import { initInputs } from './ui';
+import { initInputs, showRhymes } from './ui';
 import { words } from './words';
-import { getSyllables, Syllable } from './phonetics';
+import { getRhymes } from './rhyme';
 
-function onChange(word: string, category: number) {
-  console.log(`Input values changed: '${word}', ${category}`);
+function onChange(query: string, category: number) {
+  console.log(`Input values changed: '${query}', ${category}`);
 
-  const wordList = words.filter(w => w.category <= category);
-  const syllables = getSyllables(word);
+  const wordList = words.filter((w) => w.category <= category);
+  const rhymes = getRhymes(query, wordList);
+
+  showRhymes(rhymes);
 }
 
 function initialize() {
