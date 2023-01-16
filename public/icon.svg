@@ -25,8 +25,8 @@
      inkscape:document-units="px"
      showgrid="true"
      inkscape:zoom="35.526034"
-     inkscape:cx="11.780094"
-     inkscape:cy="10.654159"
+     inkscape:cx="10.513417"
+     inkscape:cy="10.682307"
      inkscape:window-width="1876"
      inkscape:window-height="1052"
      inkscape:window-x="44"
@@ -60,19 +60,19 @@
        cy="8"
        r="8" />
     <circle
-       style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
        id="path1780"
        cx="4.5"
        cy="4.5"
        r="2" />
     <circle
-       style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
        id="circle1782"
        cx="11.5"
        cy="4.5"
        r="2" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-opacity:1"
        id="path1836"
        sodipodi:type="arc"
        sodipodi:cx="8"
