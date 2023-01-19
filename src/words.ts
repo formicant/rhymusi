@@ -48,3 +48,4 @@ function makeWord(w: LinkuWord): Word {
 }
 
 export const words = Object.values(linku.data).map(makeWord);
+

@@ -1,22 +1,13 @@
-import { initInputs, showRhymes } from './ui';
-import { words } from './words';
-import { getRhymes } from './rhyme';
+import { getResult } from './result';
+import { initializeInputs, showResult } from './ui';
 
-function onChange(query: string, category: number) {
-  console.log(`Input values changed: '${query}', ${category}`);
-
-  const wordList = words.filter((w) => w.category <= category);
-  const rhymes = getRhymes(query, wordList);
-
-  showRhymes(rhymes);
+function onInput(query: string, category: number) {
+  const result = getResult(query, category);
+  showResult(result);
 }
 
 function initialize() {
-  console.log('Initializing...');
-
-  initInputs(onChange);
-
-  console.log('Initializied.');
+  initializeInputs(onInput);
 }
 
 initialize();

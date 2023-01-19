@@ -23,7 +23,6 @@ function getRhymeDistance(syllables1: Syllable[], syllables2: Syllable[]): numbe
 
 export interface Rhyme {
   readonly words: Word[];
-  readonly syllableCount: number;
   readonly distance: number;
 }
 
@@ -33,13 +32,11 @@ export function getRhymes(query: string, wordList: Word[]): Rhyme[] {
   const singleWordRhymes = wordList
     .map((w) => ({
       words: [w],
-      syllableCount: w.syllables.length,
       distance: getRhymeDistance(querySyllables, w.syllables),
     }));
 
   // TODO: multi-word rhymes
 
   const rhymes = singleWordRhymes;
-  rhymes.sort((a, b) => a.distance - b.distance);
   return rhymes;
 }

@@ -1,5 +1,6 @@
 import { Word, categories, defaultCategory } from './words';
 import { Rhyme } from './rhyme';
+import { Group, Result } from './result';
 
 function getById<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -9,25 +10,20 @@ function getById<T extends HTMLElement>(id: string): T {
   return element as T;
 }
 
-export function initInputs(onChanged: (query: string, category: number) => void) {
-  const header = getById('header');
-  document.addEventListener('scroll', () => {
-    header.className = window.scrollY > 0 ? 'shadow' : '';
-  });
-
+export function initializeInputs(onInput: (query: string, category: number) => void) {
   const queryInput = getById<HTMLInputElement>('queryInput');
   const categorySlider = getById<HTMLInputElement>('categorySlider');
-  const categoryLabel = getById<HTMLSpanElement>('categoryLabel');
+  const categoryLabel = getById('categoryLabel');
 
   function onCategoryInput() {
     const category = Number(categorySlider.value);
     categoryLabel.textContent = categories[category];
-    onChanged(queryInput.value, category);
+    onInput(queryInput.value, category);
   }
 
   function onQueryInput() {
     const category = Number(categorySlider.value);
-    onChanged(queryInput.value, category);
+    onInput(queryInput.value, category);
   }
 
   categorySlider.setAttribute('max', `${categories.length - 1}`);
@@ -41,45 +37,47 @@ export function initInputs(onChanged: (query: string, category: number) => void)
 }
 
 function getWordElement(word: Word): HTMLSpanElement {
-  const span = document.createElement('span');
-  span.textContent = word.word;
-  span.title = word.definition;
-  return span;
+  const wordElement = document.createElement('span');
+  wordElement.className = 'word';
+  wordElement.textContent = word.word;
+  wordElement.title = word.definition;
+  return wordElement;
 }
 
-function getRhymeElement(rhyme: Rhyme): HTMLDivElement {
-  const div = document.createElement('div');
+function getRhymeElement(rhyme: Rhyme): HTMLLIElement {
+  const rhymeElement = document.createElement('li');
+  rhymeElement.className = 'rhyme';
   for (const word of rhyme.words) {
-    div.appendChild(getWordElement(word));
+    rhymeElement.appendChild(getWordElement(word));
   }
-  div.append(` (${rhyme.distance})`);
-  return div;
+  // rhymeElement.append(` (${rhyme.distance})`);
+  return rhymeElement;
 }
 
-function getColumnElement(header: string, rhymes: Rhyme[]): HTMLDivElement {
-  const div = document.createElement('div');
-  div.className = 'column';
-  for (const rhyme of rhymes) {
-    div.appendChild(getRhymeElement(rhyme));
+function getGroupElement(group: Group): HTMLDivElement {
+  const groupElement = document.createElement('div');
+  groupElement.className = 'group';
+
+  const titleElement = document.createElement('div');
+  titleElement.className = 'groupTitle';
+  titleElement.textContent = group.title;
+  groupElement.appendChild(titleElement);
+
+  const listElement = document.createElement('ul');
+  listElement.className = 'groupList';
+  for (const rhyme of group.rhymes) {
+    listElement.appendChild(getRhymeElement(rhyme));
   }
-  return div;
+  groupElement.appendChild(listElement);
+
+  return groupElement;
 }
 
-export function showRhymes(rhymes: Rhyme[]) {
-  const result = getById('result');
-  result.innerHTML = '';
+export function showResult(result: Result) {
+  const resultElement = getById('result');
+  resultElement.innerHTML = '';
 
-  const columns: { [header: string]: Rhyme[] } = { };
-  for (const rhyme of rhymes) {
-    const header = String(rhyme.syllableCount);
-
-    if (!columns[header]) {
-      columns[header] = [];
-    }
-    columns[header].push(rhyme);
-  }
-
-  for (const [header, group] of Object.entries(columns)) {
-    result.appendChild(getColumnElement(header, group));
+  for (const group of result.groups) {
+    resultElement.appendChild(getGroupElement(group));
   }
 }
