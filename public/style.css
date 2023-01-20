@@ -73,3 +73,8 @@ main {
 .rhyme {
   list-style-type: none;
 }
+
+.category-pu      { color: #03A; }
+.category-ku-suli { color: #062; }
+.category-ku-lili { color: #750; }
+.category-ale     { color: #802; }

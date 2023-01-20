@@ -18,6 +18,7 @@ export function initializeInputs(onInput: (query: string, category: number) => v
   function onCategoryInput() {
     const category = Number(categorySlider.value);
     categoryLabel.textContent = categories[category];
+    categoryLabel.className = `category-${categories[category].replace(' ', '-')}`;
     onInput(queryInput.value, category);
   }
 
@@ -36,9 +37,11 @@ export function initializeInputs(onInput: (query: string, category: number) => v
   queryInput.focus();
 }
 
+
 function getWordElement(word: Word): HTMLSpanElement {
   const wordElement = document.createElement('span');
-  wordElement.className = 'word';
+  const category = categories[word.category].replace(' ', '-');
+  wordElement.className = `word category-${category}`;
   wordElement.textContent = word.word;
   wordElement.title = word.definition;
   return wordElement;
@@ -47,10 +50,11 @@ function getWordElement(word: Word): HTMLSpanElement {
 function getRhymeElement(rhyme: Rhyme): HTMLLIElement {
   const rhymeElement = document.createElement('li');
   rhymeElement.className = 'rhyme';
+  rhymeElement.style.opacity = String((1 - Math.min(1, rhyme.distance)) * 0.8 + 0.2);
   for (const word of rhyme.words) {
     rhymeElement.appendChild(getWordElement(word));
   }
-  // rhymeElement.append(` (${rhyme.distance})`);
+  rhymeElement.append(` (${rhyme.distance.toPrecision(2)})`);
   return rhymeElement;
 }
 
