@@ -11,8 +11,8 @@
 // [ ] yupekosi
 // [ ] yutu
 
-const vowels = 'ieaou'; // vowels considered similar are next to each other
-const consonants = 'jklmnpstw'; // order can be arbitrary
+export const vowels = 'ieaou'; // vowels considered similar are next to each other
+export const consonants = 'jklmnpstw'; // order can be arbitrary
 
 // interface Articulation {
 //   readonly place: 'none' | 'labial' | 'dental' | 'palatal' | 'velar';
