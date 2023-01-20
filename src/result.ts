@@ -1,6 +1,5 @@
 import { words } from './words';
-import { vowels, consonants } from './phonetics';
-import { Rhyme, getRhymes } from './rhyme';
+import { Rhyme, getRhymes, order } from './rhyme';
 
 export interface Result {
   readonly groups: Group[];
@@ -10,37 +9,6 @@ export interface Group {
   readonly index: number;
   readonly title: string;
   readonly rhymes: Rhyme[];
-}
-
-function* getOrderSequence(rhyme: Rhyme): Generator<number> {
-  for (let w = rhyme.words.length - 1; w >= 0; w -= 1) {
-    const word = rhyme.words[w];
-    for (let s = word.syllables.length - 1; s >= 0; s -= 1) {
-      const syllable = word.syllables[s];
-
-      yield vowels.indexOf(syllable.nucleus);
-      yield consonants.indexOf(syllable.coda);
-      yield consonants.indexOf(syllable.onset);
-    }
-  }
-}
-
-function order(r1: Rhyme, r2: Rhyme): number {
-  if (r1.distance < r2.distance) return -1;
-  if (r1.distance > r2.distance) return 1;
-
-  // Equal rhyme distance. Order by ending
-  const seq1 = getOrderSequence(r1);
-  const seq2 = getOrderSequence(r2);
-  while (true) {
-    const o1 = seq1.next();
-    const o2 = seq2.next();
-    if (o1.done || o2.done) {
-      return (o1.done ? 0 : 1) - (o2.done ? 0 : 1);
-    }
-    const r = o1.value - o2.value;
-    if (r !== 0) return r;
-  }
 }
 
 const groupTitles = [

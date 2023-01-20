@@ -25,6 +25,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-multi-spaces': 'off',
     'key-spacing': ['error', { mode: 'minimum' }],
+    'no-constant-condition': ['error', { checkLoops: false }],
     'no-restricted-syntax': [
       'error',
       'ForInStatement',
